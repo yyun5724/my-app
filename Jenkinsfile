@@ -4,7 +4,10 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/yyun5724/my-app.git', branch: 'main'
+                git(
+                    url: 'https://github.com/yyun5724/my-app.git',
+                    branch: 'main
+                )
             }
         }
         
@@ -27,8 +30,9 @@ pipeline {
 
     post {
         always {
-            junit 'target/surefire-reports/*.xml'
+            junit '**/target/surefire-reports/*.xml' // 确保测试报告路径正确
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
     }
 }
+
