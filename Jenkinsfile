@@ -14,7 +14,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    def mvnHome = tool name: 'Maven 3.6.3', type: 'Maven'
+                    def mvnHome = tool name: 'Maven', type: 'Maven'
                     env.PATH = "${mvnHome}/bin:${env.PATH}"
                 }
                 sh 'mvn clean package'
@@ -30,7 +30,7 @@ pipeline {
 
     post {
         always {
-            junit '**/target/surefire-reports/*.xml' // 确保测试报告路径正确
+            junit '**/root/my-app/src/main/resources/*.xml' // 确保测试报告路径正确
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
     }
