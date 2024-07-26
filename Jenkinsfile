@@ -1,10 +1,14 @@
 pipeline {
     agent any
 
+    environment {
+        GIT_TIMEOUT = '120' // 增加超时时间到120秒
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/yyun5724/my-app.git', branch: 'main'
+                git credentialsId: 'my-app', url: 'https://github.com/yyun5724/my-app.git', branch: 'main'
             }
         }
 
@@ -35,4 +39,3 @@ pipeline {
         }
     }
 }
-
