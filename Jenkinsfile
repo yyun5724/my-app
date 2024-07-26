@@ -42,7 +42,7 @@ pipeline {
             steps {
                 script {
                     def remote = [:]
-                    remote.name = 'my-remote-server'
+                    remote.name = 'root'
                     remote.host = env.DEPLOY_SERVER
                     remote.user = env.DEPLOY_USER
                     remote.password = env.DEPLOY_PASSWORD
