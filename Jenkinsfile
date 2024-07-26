@@ -15,7 +15,7 @@ pipeline {
                     def remote = [:]
                     remote.name = 'my-remote-server'
                     remote.host = env.DEPLOY_SERVER
-                    remote.user = 'your_username' // 根据你的凭据填写
+                    remote.user = 'root' // 根据你的凭据填写
                     remote.credentialsId = env.SSH_CREDENTIALS_ID
                     remote.allowAnyHosts = true
 
