@@ -6,7 +6,7 @@ pipeline {
             steps {
                 git(
                     url: 'https://github.com/yyun5724/my-app.git',
-                    branch: 'main
+                    branch: 'main'
                 )
             }
         }
