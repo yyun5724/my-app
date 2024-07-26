@@ -4,7 +4,7 @@ pipeline {
     environment {
         DEPLOY_SERVER = '10.220.180.150'
         DEPLOY_DIR = '/root/jenkins/'
-        JAR_FILE = 'target/your-package.jar'
+        JAR_FILE = 'target/my-app-1.0-SNAPSHOT.jar'
         SSH_CREDENTIALS_ID = '10.220.180.150' // 使用刚刚创建的凭据ID
     }
 
