@@ -36,9 +36,6 @@ pipeline {
         }
 
         stage('Deploy') {
-            when {
-                branch 'main'
-            }
             steps {
                 script {
                     def remote = [:]
