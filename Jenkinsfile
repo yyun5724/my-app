@@ -4,34 +4,34 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git(
-                    url: 'https://github.com/yyun5724/my-app.git',
-                    branch: 'main'
-                )
+                git 'https://github.com/yyun5724/my-app.git'
             }
         }
-        
+
         stage('Build') {
             steps {
                 script {
-                    def mvnHome = tool name: 'Maven 3.6.3', type: 'Maven'
-                    env.PATH = "${mvnHome}/bin:${env.PATH}"
+                    def mvnHome = tool name: 'Maven 3.6.3', type: 'maven'
+                    sh "${mvnHome}/bin/mvn clean package"
                 }
-                sh 'mvn clean package'
             }
         }
-        
+
         stage('Test') {
             steps {
-                sh 'mvn test'
+                script {
+                    def mvnHome = tool name: 'Maven 3.6.3', type: 'maven'
+                    sh "${mvnHome}/bin/mvn test"
+                }
             }
         }
     }
 
     post {
         always {
-            junit '**/target/surefire-reports/*.xml' // 确保测试报告路径正确
-            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            script {
+                junit '**/target/surefire-reports/*.xml'
+            }
         }
     }
 }
