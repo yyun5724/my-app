@@ -30,7 +30,7 @@ pipeline {
 
     post {
         always {
-            junit '**/root/my-app/src/main/resources/*.xml' // 确保测试报告路径正确
+            junit '**/target/surefire-reports/*.xml' // 确保测试报告路径正确
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
     }
