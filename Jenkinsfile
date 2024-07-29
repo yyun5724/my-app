@@ -6,7 +6,7 @@ pipeline {
         DEPLOY_SERVER = '10.220.180.150' // 远程服务器地址
         DEPLOY_USER = 'root' // 远程服务器用户名
         DEPLOY_PASSWORD = 'Yinshuai+001' // 远程服务器密码
-        DEPLOY_DIR = 'jenkins' // 远程服务器部署目录
+        DEPLOY_DIR = '/root/jenkins' // 远程服务器部署目录
         JAR_FILE = 'target/my-app-1.0-SNAPSHOT.jar' // 打包后的 JAR 文件路径
     }
 
