@@ -6,7 +6,7 @@ pipeline {
         DEPLOY_SERVER = '10.220.180.150' // 远程服务器地址
         DEPLOY_USER = 'root' // 远程服务器用户名
         DEPLOY_PASSWORD = 'Yinshuai+001' // 远程服务器密码
-        DEPLOY_DIR = '/root/jenkins/' // 远程服务器部署目录
+        DEPLOY_DIR = 'jenkins' // 远程服务器部署目录
         JAR_FILE = 'target/my-app-1.0-SNAPSHOT.jar' // 打包后的 JAR 文件路径
     }
 
@@ -55,7 +55,18 @@ pipeline {
                                         sourceFiles: env.JAR_FILE,
                                         removePrefix: '',
                                         remoteDirectory: env.DEPLOY_DIR,
-                                        execCommand: "nohup java -jar ${env.DEPLOY_DIR}${env.JAR_FILE.split('/').last()} > ${env.DEPLOY_DIR}app.log 2>&1 &"
+                                        execCommand: """
+                                            if ! pgrep -f 'my-app-1.0-SNAPSHOT.jar' > /dev/null; then
+                                                if ! command -v java > /dev/null; then
+                                                    echo "Java not found. Installing Java..."
+                                                    sudo dnf install -y java-17-openjdk
+                                                fi
+                                                echo "Starting JAR file..."
+                                                nohup java -jar ${env.DEPLOY_DIR}${env.JAR_FILE.split('/').last()} > ${env.DEPLOY_DIR}app.log 2>&1 &
+                                            else
+                                                echo "JAR file is already running."
+                                            fi
+                                        """
                                     )
                                 ],
                                 usePromotionTimestamp: false,
